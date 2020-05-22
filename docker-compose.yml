@@ -1,0 +1,27 @@
+version: '3'
+services:
+  kissudb:
+    image: mysql:5.7
+    volumes:
+       - mysql_storage:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: kissu7379
+      MYSQL_USER: Kishore
+      MYSQL_PASSWORD: redhatkissu
+      MYSQL_DATABASE: kissudb
+
+
+  wordpress:
+    image: WordPress:latest
+    restart: always
+    depends_on:
+      - kissudb
+    ports:
+      - 8809:80
+    volumes:
+      - wp_storage:/var/www/html/
+
+volumes:
+  mysql_storage:
+  wp_storage:
